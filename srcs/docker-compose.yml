@@ -1,0 +1,43 @@
+version: '3.3'
+services:
+  nginx:
+    image: nginx
+  mariadb:
+    image: mysql
+    ports:
+      - "3306:3306"
+    restart: always
+    expose:
+      - "3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+      - MYSQL_DATABASE=demodb
+
+# services:
+#     server:
+#         build: 
+#             dockerfile: Dockerfile
+#             context: ./server 
+#         volumes:
+#             - /app/node_modules 
+#             - ./server:/app
+#     nginx:
+#         restart: always
+#         build: 
+#           dockerfile: Dockerfile
+#           context: ./controller
+#         ports: 
+#           - '5000:80'
+#     client: 
+#         build: 
+#             dockerfile: Dockerfile
+#             context: ./client
+#         volumes:
+#             - /app/node_modules 
+#             - ./client:/app
+#     ports:
+#   - "3306:3306"
+#   expose:
+#     - "3306"
