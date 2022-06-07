@@ -4,16 +4,36 @@ services:
     image: nginx
   mariadb:
     image: mysql
+    depends_on:
+      - nginx
+    volumes:
+      - db_data:/var/lib/mysql
     ports:
       - "3306:3306"
     restart: always
-    expose:
-      - "3306"
     environment:
       - MYSQL_ROOT_PASSWORD=password
       - MYSQL_USER=user
       - MYSQL_PASSWORD=password
       - MYSQL_DATABASE=demodb
+  wordpress:
+    depends_on:
+      - mariadb
+    image: wordpress
+    volumes:
+      - wordpress_data:/var/www/html
+    ports:
+      - "3306:80"
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+volumes:
+  db_data: {}
+  wordpress_data: {}
+
 
 # services:
 #     server:

@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    config.sh                                          :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/06/06 14:33:08 by mlazzare          #+#    #+#              #
+#    Updated: 2022/06/06 14:33:10 by mlazzare         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 rm -rf /etc/nginx/sites-available/default
 rm -rf /etc/nginx/sites-enabled/default
 mkdir /var/www/myserver/phpmyadmin
