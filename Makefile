@@ -6,7 +6,7 @@
 #    By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 14:29:53 by mlazzare          #+#    #+#              #
-#    Updated: 2022/06/09 08:12:34 by mlazzare         ###   ########.fr        #
+#    Updated: 2022/06/09 15:05:06 by mlazzare         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,9 +29,7 @@ clean:
 	docker volume prune
 
 fclean: clean
-	docker network rm
-	docker image rm
-	docker volume rm
+	cd ./srcs && docker-compose rm -f -v
 
 restart:
 	docker system prune -f
