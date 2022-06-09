@@ -23,3 +23,9 @@ OR
 
 `docker.errors.DockerException: Credentials store error: StoreError('Credentials store docker-credential-secretservice exited with "Error calling StartServiceByName for org.freedesktop.secrets: Timeout was reached".',)`
 sudo usermod -a -G docker $USER
+
+
+
+for makefile
+cd ./srcs &&
+https://docs.docker.com/engine/reference/commandline/
