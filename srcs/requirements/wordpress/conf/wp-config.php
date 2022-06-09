@@ -6,7 +6,7 @@
 #    By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 14:33:20 by mlazzare          #+#    #+#              #
-#    Updated: 2022/06/08 11:51:18 by mlazzare         ###   ########.fr        #
+#    Updated: 2022/06/09 07:16:41 by mlazzare         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,16 +14,16 @@
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', getenv('MARIADB_DB') );
+define( 'DB_NAME', getenv('MYSQL_DB') );
 
 /** MySQL database username */
-define( 'DB_USER', getenv('MARIADB_USER') );
+define( 'DB_USER', getenv('MYSQL_USER') );
 
 /** MySQL database password */
-define( 'DB_PASSWORD', getenv('MARIADB_PSW') );
+define( 'DB_PASSWORD', getenv('MYSQL_PASSWORD') );
 
 /** MySQL hostname */
-define( 'DB_HOST', getenv('MARIADB_HOST') );
+define( 'DB_HOST', getenv('MYSQL_HOST') );
 
 /** Database Charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );
