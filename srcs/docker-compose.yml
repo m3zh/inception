@@ -1,4 +1,5 @@
 version: '3.3'
+
 services:
   nginx:
     image: nginx
@@ -11,6 +12,8 @@ services:
     volumes:
       - db_data:/var/lib/mysql
     restart: always
+    env_file:
+      - .env
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_USER=${MYSQL_USER}
@@ -22,39 +25,15 @@ services:
     image: wordpress
     volumes:
       - wordpress_data:/var/www/html
+    restart: always
+    env_file:
+      - .env
     environment:
-      WORDPRESS_DB_HOST: db
-      WORDPRESS_DB_USER: wordpress
-      WORDPRESS_DB_PASSWORD: wordpress
-      WORDPRESS_DB_NAME: wordpress
+      - WORDPRESS_DB_HOST=${WORDPRESS_DB_HOST}
+      - WORDPRESS_DB_USER=${WORDPRESS_DB_USER}
+      - WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD}
+      - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
+
 volumes:
   db_data: {}
   wordpress_data: {}
-
-
-# services:
-#     server:
-#         build: 
-#             dockerfile: Dockerfile
-#             context: ./server 
-#         volumes:
-#             - /app/node_modules 
-#             - ./server:/app
-#     nginx:
-#         restart: always
-#         build: 
-#           dockerfile: Dockerfile
-#           context: ./controller
-#         ports: 
-#           - '5000:80'
-#     client: 
-#         build: 
-#             dockerfile: Dockerfile
-#             context: ./client
-#         volumes:
-#             - /app/node_modules 
-#             - ./client:/app
-#     ports:
-#   - "3306:3306"
-#   expose:
-#     - "3306"

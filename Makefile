@@ -6,7 +6,7 @@
 #    By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 14:29:53 by mlazzare          #+#    #+#              #
-#    Updated: 2022/06/09 15:05:06 by mlazzare         ###   ########.fr        #
+#    Updated: 2022/06/14 00:32:14 by mlazzare         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,18 +22,22 @@ $(NAME):
 	echo "127.0.0.1 mlazzare.42.fr" >> /etc/hosts
 
 clean:
-	docker-compose -f srcs/docker-compose.yml down
-	docker system prune -f
-	docker network prune
-	docker image prune
-	docker volume prune
+	sudo docker-compose -f srcs/docker-compose.yml down
+	sudo docker system prune -f
+	sudo docker network prune -f
+	sudo docker image prune -f
+	sudo docker volume prune -f
 
 fclean: clean
-	cd ./srcs && docker-compose rm -f -v
+	sudo docker rm -f -v --env ${docker ps -q}
+	sudo docker rmi -f
 
+stop:
+	sudo docker stop ${docker ps -q}
+	
 restart:
-	docker system prune -f
-	docker-compose -f srcs/docker-compose.yml start
+	sudo docker system prune -f
+	sudo docker-compose -f srcs/docker-compose.yml start
 
 re: clean all
 
