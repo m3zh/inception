@@ -29,8 +29,10 @@ clean:
 	sudo docker volume prune -f
 
 fclean: clean
-	sudo docker rm -f -v --env ${docker ps -q}
-	sudo docker rmi -f
+	if	[ "${docker ps -q}" ]; then \
+		docker rm -f -v ${docker ps -q}; \
+		docker rmi -f -v ${docker ps -q}; \
+	fi
 
 stop:
 	sudo docker stop ${docker ps -q}
