@@ -10,7 +10,7 @@ services:
     depends_on:
       - nginx
     volumes:
-      - db_data:/var/lib/mysql
+      - db_volume:/var/lib/mysql
     restart: always
     env_file:
       - .env
@@ -24,7 +24,7 @@ services:
   #     - mariadb
   #   image: wordpress
   #   volumes:
-  #     - wordpress_data:/var/www/html
+  #     - wp_volume:/var/www/html
   #   restart: always
   #   env_file:
   #     - .env
@@ -35,5 +35,15 @@ services:
   #     - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
 
 volumes:
-  db_data: {}
-  wordpress_data: {}
+    db_volume:
+      driver: local
+      driver_opts:
+          device: /home/user42/data/wordpress
+          o: bind
+          type: none
+    wp_volume:
+      driver: local
+      driver_opts:
+          device: /home/user42/data/wordpress
+          o: bind
+          type: none
