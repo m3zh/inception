@@ -13,6 +13,10 @@ Particularly useful are `rm, prune, up, down`
 ### How to write the docker-compose.yml  
 ### How to write the Dockerfile  
 
+## Debugging  
+Do not build from the docker-compose file.  
+Go to each single container folder (eg srsc/requirements/mariadb) and run `docker build .`  
+
 ## Errors and solution
 1. `Error starting userland proxy: listen tcp4 0.0.0.0:3306: bind: address already in use`  
 Use `netstat -tulpn` on the terminal to get the PID  
