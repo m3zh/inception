@@ -16,3 +16,5 @@ RUN chown -R www-data:www-data .
 RUN chmod -R 755 .
 
 EXPOSE 3306
+
+ENTRYPOINT ["sh", "entrypoint.sh"]

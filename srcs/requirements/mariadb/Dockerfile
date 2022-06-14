@@ -1,12 +1,11 @@
-FROM debian:buster
+FROM  debian:buster
 
-RUN apt-get update && apt-get upgrade
-RUN apt-get install mariadb mariadb-server mariadb-client
-RUN php-fpm php-mysql \
-   php php-cgi php-mysqli php-pear php-mbstring php-gettext php-common php-phpseclib php-mysql # remove or keep
+RUN   apt-get update
+RUN   apt-get upgrade -y
+RUN   apt-get install -y mariadb-server
    
-COPY tools/configure.sh /tmp/configure.sh
+COPY tools/config.sh /tmp/config.sh
 
-ENTRYPOINT ["sh", "/tmp/configure.sh"]
+ENTRYPOINT ["sh", "/tmp/config.sh"]
  
 EXPOSE 3306
