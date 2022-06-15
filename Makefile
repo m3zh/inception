@@ -6,7 +6,7 @@
 #    By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 14:29:53 by mlazzare          #+#    #+#              #
-#    Updated: 2022/06/14 23:00:19 by mlazzare         ###   ########.fr        #
+#    Updated: 2022/06/16 00:31:48 by mlazzare         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,9 @@ all:
 	sudo usermod -a -G docker ${USER}
 	sudo systemctl enable docker
 	sudo systemctl start docker
+	sudo mkdir -p /home/${USER}/data/
+	sudo mkdir -p /home/${USER}/data/database
+	sudo mkdir -p /home/${USER}/data/wordpress
 	sudo docker-compose -f srcs/docker-compose.yml up
 	@echo "127.0.0.1 mlazzare.42.fr" >> /etc/hosts
 
