@@ -12,6 +12,9 @@ Particularly useful are `rm, prune, up, down`
 
 ### How to write the docker-compose.yml  
 ### How to write the Dockerfile  
+> A Docker image is built up from a series of layers. Each layer represents an instruction in the image’s Dockerfile. Each layer except the very last one is read-only. (docs [here](
+https://docs.docker.com/storage/storagedriver/#images-and-layers))
+
 
 ## Debugging  
 Do not build from the docker-compose file.  
