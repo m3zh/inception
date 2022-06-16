@@ -14,8 +14,6 @@ services:
     restart: always
     networks:
       - 42_inception
-    env_file:
-      - .env
     environment:
       - MYSQL_ROOT_PASSWORD=kkkkkkk
     #   - MYSQL_USER=${MYSQL_USER}
@@ -31,8 +29,6 @@ services:
     networks:
       - 42_inception
     restart: always
-    env_file:
-      - .env
     # environment:
     #   - WORDPRESS_DB_HOST=${WORDPRESS_DB_HOST}
     #   - WORDPRESS_DB_USER=${WORDPRESS_DB_USER}
