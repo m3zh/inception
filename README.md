@@ -54,3 +54,6 @@ Else, try ```sudo usermod -a -G docker $USER
 
 3. `docker.errors.DockerException: Credentials store error: StoreError('Credentials store docker-credential-secretservice exited with "Error calling StartServiceByName for org.freedesktop.secrets: Timeout was reached".',)`  
 Remove credStore line in ~/.docker/config.json
+
+The command '/bin/sh -c apt-get update && apt-get upgrade' returned a non-zero code: 1
+-y
