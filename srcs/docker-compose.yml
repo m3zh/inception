@@ -12,27 +12,32 @@ services:
     volumes:
       - database:/var/lib/mysql
     restart: always
+    networks:
+      - 42_inception
     env_file:
       - .env
     environment:
-      - MYSQL_ROOT_PASSWORD
-      - MYSQL_USER
-      - MYSQL_PASSWORD
-      - MYSQL_DATABASE
-  # wordpress:
-  #   depends_on:
-  #     - mariadb
-  #   image: wordpress
-  #   volumes:
-  #     - wp_volume:/var/www/html
-  #   restart: always
-  #   env_file:
-  #     - .env
-  #   environment:
-  #     - WORDPRESS_DB_HOST=${WORDPRESS_DB_HOST}
-  #     - WORDPRESS_DB_USER=${WORDPRESS_DB_USER}
-  #     - WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD}
-  #     - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
+      - MYSQL_ROOT_PASSWORD=kkkkkkk
+    #   - MYSQL_USER=${MYSQL_USER}
+    #   - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    #   - MYSQL_DATABASE=${MYSQL_DATABASE}
+  wordpress:
+    image: wordpress
+    depends_on:
+      - mariadb
+      - nginx
+    volumes:
+      - wp_volume:/var/www/html
+    networks:
+      - 42_inception
+    restart: always
+    env_file:
+      - .env
+    # environment:
+    #   - WORDPRESS_DB_HOST=${WORDPRESS_DB_HOST}
+    #   - WORDPRESS_DB_USER=${WORDPRESS_DB_USER}
+    #   - WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD}
+    #   - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
 
 volumes:
     database:
@@ -47,3 +52,6 @@ volumes:
           device: /home/${USER}/data/wp
           o: bind
           type: none
+
+networks:
+  42_inception:
