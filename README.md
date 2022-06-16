@@ -15,6 +15,25 @@ Particularly useful are `rm, prune, up, down`
 > A Docker image is built up from a series of layers. Each layer represents an instruction in the image’s Dockerfile. Each layer except the very last one is read-only. (docs [here](
 https://docs.docker.com/storage/storagedriver/#images-and-layers))
 
+```
+FROM debian:buster
+
+// RUN is executed at build-time, before the container starts
+RUN // installations, such as RUN apt-get install php, bash commands, etc.
+
+// CMD is executed at run-time when the container starts
+CMD // CMD service start mysql
+
+COPY // to copy one file from the local env into the docker env
+     // eg. COPY /config/my-config .
+
+EXPOSE // to expose a port
+
+ENTRYPOINT ["..."]	// either a docker command or a bash script
+			// if it's a bash script, do ["my_script.sh"]
+			// if it's a docker command, do ["cmd", "flags"], eg ["nginx","-g","deamon -off"]
+```
+
 
 ## Debugging  
 Do not build from the docker-compose file.  
