@@ -1,22 +1,23 @@
-FROM debian:buster
+FROM    debian:buster
 
-RUN sudo apt-get update && sudo apt-get upgrade \
-    sudo apt-get install curl \
-                    mysql-server \
-                    php \
-                    php-mysql \
-                    mariadb-client
+RUN     sudo apt-get update && sudo apt-get upgrade \
+        sudo apt-get install wget \
+                    php7 php-phar \
+			        php-json php-curl php-fpm php-mysqli php-iconv
 
-RUN mkdir -p /var/www/wordpress
-WORKDIR /var/www/
+RUN     mkdir -p /var/www/wordpress
+WORKDIR /var/www/wordpress
 
-COPY ./conf/wp-config.php ./wordpress/
+RUN		wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -p /usr/bin/wp 
+RUN		chmod 700 ./usr/bin/wp 
+RUN		wp core download --path=/var/www/wordpress
 
-RUN chown -R www-data:www-data .
-RUN chmod -R 755 .
+COPY    ./conf/wp-config.php /config/
 
-RUN echo "127.0.0.1 mlazzare.42.fr" >> /etc/apache2/apache2.conf
+COPY    ./tools/entrypoint.sh .
+# RUN chown -R www-data:www-data .
+# RUN chmod -R 755 .
 
 EXPOSE 3306
 
-ENTRYPOINT ["sh", "entrypoint.sh"]
+ENTRYPOINT ["entrypoint.sh"]
