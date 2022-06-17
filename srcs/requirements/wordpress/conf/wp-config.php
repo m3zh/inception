@@ -6,7 +6,7 @@
 #    By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 14:33:20 by mlazzare          #+#    #+#              #
-#    Updated: 2022/06/09 07:16:41 by mlazzare         ###   ########.fr        #
+#    Updated: 2022/06/17 06:46:50 by mlazzare         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,6 +72,9 @@ $table_prefix = 'wp_';
  * @link https://codex.wordpress.org/Debugging_in_WordPress
  */
 define( 'WP_DEBUG', false );
+
+	
+define('WP_ALLOW_REPAIR', true);
 
 /* That's all, stop editing! Happy publishing. */
 

@@ -6,7 +6,7 @@
 #    By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 14:29:53 by mlazzare          #+#    #+#              #
-#    Updated: 2022/06/17 06:15:40 by mlazzare         ###   ########.fr        #
+#    Updated: 2022/06/17 07:04:20 by mlazzare         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,8 @@ all:
 	sudo systemctl enable docker
 	sudo systemctl start docker
 	sudo docker-compose -f srcs/docker-compose.yml up
+	sudo mkdir -f /home/root
+	sudo mkdir -f /home/${USER}
 	@sudo chmod 700 /etc/hosts
 	@echo "127.0.0.1 mlazzare.42.fr" >> /etc/hosts
 

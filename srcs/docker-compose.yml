@@ -14,11 +14,8 @@ services:
     restart: always
     networks:
       - 42_inception
-    environment:
-      - MYSQL_ROOT_PASSWORD=kkkkkkk
-    #   - MYSQL_USER=${MYSQL_USER}
-    #   - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-    #   - MYSQL_DATABASE=${MYSQL_DATABASE}
+    env_file:
+      - .env
   wordpress:
     image: wordpress
     depends_on:
@@ -29,11 +26,8 @@ services:
     networks:
       - 42_inception
     restart: always
-    # environment:
-    #   - WORDPRESS_DB_HOST=${WORDPRESS_DB_HOST}
-    #   - WORDPRESS_DB_USER=${WORDPRESS_DB_USER}
-    #   - WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD}
-    #   - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
+    env_file:
+      - .env
 
 volumes:
     database:
