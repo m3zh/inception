@@ -1,33 +1,37 @@
 version: '3.3'
 
 services:
+
   nginx:
     image: nginx
+    container_name: nginx
     ports:
-    - "443:443"
+      - "443:443"
+    volumes:
+      - wp_volume:/var/www/wordpress
+    networks:
+      - 42_inception
+    restart: unless-stopped
+
   mariadb:
     image: mysql
-    depends_on:
-      - nginx
+    container_name: mariadb
     volumes:
       - database:/var/lib/mysql
     restart: always
     networks:
       - 42_inception
-    env_file:
-      - .env
+
   wordpress:
-    image: wordpress
     depends_on:
       - mariadb
-      - nginx
+    image: wordpress
+    hostname: mlazzare.42.fr
     volumes:
-      - wp_volume:/var/www/html
+      - wp_volume:/var/www/wordpress
     networks:
       - 42_inception
     restart: always
-    env_file:
-      - .env
 
 volumes:
     database:
@@ -39,9 +43,9 @@ volumes:
     wp_volume:
       driver: local
       driver_opts:
-          device: /home/${USER}/data/wp
+          device: /home/${USER}/data/wordpress
           o: bind
           type: none
 
 networks:
-  42_inception:
+  42_inception: {}
