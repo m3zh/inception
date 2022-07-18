@@ -7,7 +7,7 @@ You can either do:
 OR
 `$(NAME): sudo docker-compose srcs/docker-compose.yml -up`
 
-All the commands to create `clean, fclean, re` are [here](https://docs.docker.com/engine/reference/commandline/docker/)
+All the commands to create `clean, fclean, re` are [here](https://docs.docker.com/engine/reference/commandline/docker/)  
 Particularly useful are `rm, prune, up, down`
 
 ### How to write the docker-compose.yml  
@@ -27,7 +27,8 @@ CMD // CMD service start mysql
 COPY // to copy one file from the local env into the docker env
      // eg. COPY /config/my-config .
 
-EXPOSE // to expose a port
+EXPOSE // to expose a port which will be visible 
+       // within the docker network/within containers
 
 ENTRYPOINT ["..."]	// either a docker command or a bash script
 			// if it's a bash script, do ["my_script.sh"]
@@ -37,7 +38,14 @@ ENTRYPOINT ["..."]	// either a docker command or a bash script
 
 ## Debugging  
 Do not build from the docker-compose file.  
-Go to each single container folder (eg srsc/requirements/mariadb) and run `docker build .`  
+Go to each single container folder (eg srsc/requirements/mariadb) and run `sudo docker build .`  
+Find the image ID with `sudo docker images`  
+The run the image `sudo docker run <image_id>`  
+Find the container id with `sudo docker ps`  
+Execute the container in interactive mode with `sudo docker exec -it container_id /bin/sh`  
+This will execute the command `/bin/sh` inside your container and you will be able to access the terminal.  
+You will be able to see if config files are at the right place for example.  
+You can execute whichever command you want with `sudo docker exec`, it does not have to be `/bin/sh`  
 
 ## Errors and solution
 1. `Error starting userland proxy: listen tcp4 0.0.0.0:3306: bind: address already in use`  
