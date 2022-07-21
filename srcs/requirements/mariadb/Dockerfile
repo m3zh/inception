@@ -1,15 +1,13 @@
-FROM    debian:buster
+FROM    alpine:3.15
 
-RUN     apt-get update
-RUN     apt-get upgrade -y
-RUN     apt-get install -yq apt-utils mariadb-server
+RUN     apk update
+RUN     apk upgrade
+RUN     apk add --no-cache mariadb mariadb-client
 
-RUN 	mkdir -p /var/lib/mysqld
+# https://www.educba.com/mariadb-bind-address/
+COPY    conf/mariadb-server.cnf   /etc/my.cnf.d/mariadb-server.cnf
 
-COPY    tools/config.sh    /tmp/
-RUN     chmod +x           /tmp/config.sh
-COPY    conf/my.cnf        /etc/my.cnf.d
+COPY    entrypoint.sh /tmp/entrypoint.sh
+RUN     chmod +x /tmp/entrypoint.sh
 
-ENTRYPOINT ["sh", "/tmp/config.sh"]
- 
-EXPOSE 3306
+ENTRYPOINT ["sh", "/tmp/entrypoint.sh"]

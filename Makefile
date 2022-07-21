@@ -11,11 +11,12 @@
 # **************************************************************************** #
 
 all:
-	sudo usermod -a -G docker ${USER}
-	sudo systemctl enable docker
+	sudo mkdir -p /home/mlazzare/data/
+	sudo mkdir -p /home/mlazzare/data/wordpress
+	sudo mkdir -p /home/mlazzare/data/database
 	sudo chmod 777 /etc/hosts
 	sudo echo "127.0.0.1 mlazzare.42.fr" >> /etc/hosts
-	sudo docker-compose -f srcs/docker-compose.yml up
+	cd srcs/ && sudo docker-compose up -d --build
 
 clean:
 	sudo docker system prune -f
@@ -24,31 +25,12 @@ clean:
 	sudo docker volume prune -f
 
 fclean: clean
-	sudo docker-compose -f srcs/docker-compose.yml down
-	@if	[ "${docker ps -q}" ]; then \
-		sudo docker rm -f -v ${docker ps -q}; \
+	@cd srcs/ && sudo docker-compose -f docker-compose.yml down --volumes --rmi all
+	@if	[ "${docker ps | wc -l}" ]; then \
+	 	docker ps -q | xargs sudo docker rm -f; \
 	fi
-	@if	[ "${docker images -a -q}" ]; then \
-		docker images -a -q | xargs docker rmi -f; \
-	fi
-	sudo systemctl stop nginx
+	@sudo rm -rf /home/mlazzare/data
 
-stop:
-	@if	[ "${docker ps -q}" ]; then \
-		docker-compose -f srcs/docker-compose.yml stop; \
-	else \
-		echo "\e[32mWARNING\e[0m: No container to stop"; \
-	fi
-	
-	
-restart:
-	@if	[ "${docker ps -q}" ]; then \
-		sudo docker-compose -f srcs/docker-compose.yml start; \
-	else \
-		echo "\e[32mWARNING\e[0m: No container to restart"; \
-	fi
-	
+re:	fclean all
 
-re: clean all
-
-.PHONY: clean fclean restart stop all
+.PHONY : all clean fclean re stop restart
